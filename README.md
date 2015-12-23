@@ -18,4 +18,5 @@ Steps to install devstack
 2. copy your local.conf to devstack-ansible/files/
 
 3. cd devstack-ansible 
+
    ansible-playbook -v -v -v devstack.yml
