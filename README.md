@@ -12,7 +12,7 @@ requirements:
 
 Steps to install devstack
 
-1. check devstack-ansible/inventory
+1. check devstack_ansible/inventory on host
     copy ip of remote machine to 2nd line
 
 2. copy your local.conf to devstack-ansible/files/
