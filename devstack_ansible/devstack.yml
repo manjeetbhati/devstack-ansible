@@ -1,0 +1,66 @@
+---
+- hosts: all
+  tasks:
+
+  # Causes an error if we try and which something that doesn't exist so use this
+  # as a workaround.
+  - name: Check to see if pip is already installed.
+    remote_user: root
+    command: "pip --version"
+    ignore_errors: true
+    changed_when: false
+    register: pip_is_installed
+    changed_when: false
+    sudo: yes
+
+  - name: Download pip
+    remote_user: root
+    command: "wget -O /home/get-pip.py https://bootstrap.pypa.io/get-pip.py"
+    when: pip_is_installed.rc != 0
+    sudo: yes
+
+  - name: Download pip
+    remote_user: root
+    command: "chmod a+x /home/get-pip.py"
+    when: pip_is_installed.rc != 0
+    sudo: yes
+
+  - name: Install pip.
+    remote_user: root
+    command: python /home/get-pip.py
+    when: pip_is_installed.rc != 0
+
+  - name: Delete get-pip.py .
+    remote_user: root
+    file: state=absent path=/home/get-pip.py
+    when: pip_is_installed.rc != 0
+    sudo: yes
+
+  - name: install git
+    remote_user: root
+    apt: name=git state=present
+
+  - name: clone devstack
+    remote_user: root
+    command: "git clone https://github.com/openstack-dev/devstack /home/devstack"
+
+  - name: install devstack
+    remote_user: root
+    command: "/home/devstack/tools/create-stack-user.sh"
+
+  - name: move devstack
+    remote_user: root
+    command: "mv /home/devstack /opt/stack/"
+
+  - name: copy local.conf
+    remote_user: root
+    copy: src=files/local.conf dest=/opt/stack/devstack/
+    sudo: yes
+
+  - name: install devstack
+    shell: "/opt/stack/devstack/stack.sh"
+    args:
+       chdir: "/opt/stack/devstack/"
+       exectable: "/bin/bash"
+    sudo: yes
+    sudo_user: stack
