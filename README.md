@@ -7,7 +7,7 @@ requirements:
 1. make sure you have python-apt installed on remote machine
   ssh to remote machine and apt-get install python-apt
 
-2. make sure you ansible installed on host from where you running
+2. make sure you have ansible installed on host from where you running playbook
    on host apt-get install ansible
 
 Steps to install devstack
