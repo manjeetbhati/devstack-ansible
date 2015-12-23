@@ -44,7 +44,7 @@
     remote_user: root
     command: "git clone https://github.com/openstack-dev/devstack /home/devstack"
 
-  - name: install devstack
+  - name: create stack user for devstack
     remote_user: root
     command: "/home/devstack/tools/create-stack-user.sh"
 
