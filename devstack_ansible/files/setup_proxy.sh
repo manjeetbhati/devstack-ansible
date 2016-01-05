@@ -15,10 +15,7 @@ fi
 
 # Update .bashrc with proxy variables
 
-echo 'export ftp_proxy=http://proxy-us.intel.com:911
-export http_proxy=http://proxy-us.intel.com:911
-export https_proxy=https://proxy-us.intel.com:911
-export no_proxy=intel.com,.intel.com,10.0.0.0/8,192.168.0.0/16,localhost,127.0.0.0/8,134.134.0.0/16,172.16.0.0/20
+echo 
 export GIT_PROXY_COMMAND=~/bin/socks-gw
 export PATH=~/bin:$PATH' >> ~/.bashrc || exit_with_error "Failed to update .bashrc!"
 
@@ -45,12 +42,6 @@ echo "Created proxy scripts..."
 
 # Update environment variables
 
-echo 'http_proxy="http://proxy-us.intel.com:911"
-https_proxy="https://proxy-us.intel.com:911"
-ftp_proxy="http://proxy-us.intel.com:911"
-no_proxy="intel.com,.intel.com,10.0.0.0/8,192.168.0.0/16,localhost,127.0.0.0/8,134.134.0.0/16,172,16.0.0/20"' >> /etc/environment || exit_with_error "Failed to update /etc/environment!"
-
-echo "Updated /etc/environment..."
 
 # Update sudoers file
 
