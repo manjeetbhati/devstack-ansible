@@ -62,4 +62,4 @@ mv /etc/sudoers.tmp /etc/sudoers || exit_with_error "Failed to update sudoers!"
 
 echo "Updated sudoers..."
 
-echo "Proxy setup complete! Restart your terminal for it to take effect."
+echo "Proxy setup complete! Restart your terminal or source .bashrc for it to take effect."
